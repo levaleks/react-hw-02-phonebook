@@ -1,15 +1,15 @@
 import React from 'react';
 import { Phonebook } from './Phonebook';
-import { MainSection, MainSectionContent, MainSectionHeading } from '../Main.sc';
+import { SMainSection, SMainSectionContent, SMainSectionHeading } from '../Main.sc';
 
 export const PhonebookSection: React.FC = () => {
     return (
-        <MainSection>
-            <MainSectionHeading>Phonebook</MainSectionHeading>
+        <SMainSection>
+            <SMainSectionHeading>Telephone book</SMainSectionHeading>
 
-            <MainSectionContent bg="lightslategray">
+            <SMainSectionContent bg="skyblue">
                 <Phonebook />
-            </MainSectionContent>
-        </MainSection>
+            </SMainSectionContent>
+        </SMainSection>
     );
 };
