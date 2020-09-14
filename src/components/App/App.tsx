@@ -1,12 +1,12 @@
 import React from 'react';
 import { PhonebookSection } from '../Main/PhonebookSection';
-import { Main, MainHeading } from '../Main';
+import { SMain, SMainHeading } from '../Main';
 
 export const App: React.FC = () => {
     return (
-        <Main>
-            <MainHeading>Homework 02 – Ex. 02</MainHeading>
+        <SMain>
+            <SMainHeading>Homework 02 – Ex. 02</SMainHeading>
             <PhonebookSection />
-        </Main>
+        </SMain>
     );
 };

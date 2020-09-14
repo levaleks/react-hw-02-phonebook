@@ -1,19 +1,19 @@
 import styled from 'styled-components';
 
-export const MainHeading = styled.h1`
+export const SMainHeading = styled.h1`
     margin: 0;
     font-size: 24px;
 `;
 
-export const MainSection = styled.section``;
+export const SMainSection = styled.section``;
 
-export const Main = styled.main`
+export const SMain = styled.main`
     min-width: 400px;
     max-width: 768px;
     margin: 0 auto;
     padding: 60px 20px 60px;
 
-    > ${MainSection} {
+    > ${SMainSection} {
         margin-top: 50px;
 
         & + & {
@@ -26,12 +26,12 @@ export const Main = styled.main`
     }
 `;
 
-export const MainSectionHeading = styled.h2`
+export const SMainSectionHeading = styled.h2`
     margin: 0;
     font-size: 20px;
 `;
 
-export const MainSectionContent = styled.div`
+export const SMainSectionContent = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
