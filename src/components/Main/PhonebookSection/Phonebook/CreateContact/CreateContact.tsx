@@ -1,13 +1,12 @@
-import React, { ChangeEvent, useCallback, useState } from 'react';
+import React, { ChangeEvent, useCallback, useContext, useState } from 'react';
 import { Box } from '../../_shared/Box';
 import { Input } from '../../_shared/Input';
 import { Button } from '../../_shared/Button';
+import { PhonebookContext } from '../PhonebookContext';
 
-export type CreateContactProps = {
-    onContactCreate: (data: { name: string; number: string; clearForm: () => void }) => void;
-};
+export const CreateContact: React.FC = () => {
+    const { contacts, dispatch } = useContext(PhonebookContext);
 
-export const CreateContact: React.FC<CreateContactProps> = ({ onContactCreate }) => {
     const [name, setName] = useState('');
     const [number, setNumber] = useState('');
 
@@ -24,16 +23,27 @@ export const CreateContact: React.FC<CreateContactProps> = ({ onContactCreate })
         (e) => {
             e.preventDefault();
 
-            onContactCreate({
-                name: e.target.name.value.trim(),
-                number: e.target.number.value.trim(),
-                clearForm: () => {
-                    setName('');
-                    setNumber('');
-                },
+            const prettifiedName = e.target.name.value.trim().replace(/\s{2,}/g, ' ');
+            const trimmedNumber = e.target.number.value.trim();
+
+            if (!prettifiedName || !trimmedNumber) return;
+
+            const hasDuplicate = contacts.some(({ name: contactName }) => {
+                return prettifiedName.toLowerCase() === contactName.toLowerCase();
             });
+
+            if (hasDuplicate) {
+                alert(`${prettifiedName} is already in your contacts`);
+
+                return;
+            }
+
+            dispatch({ type: 'CREATE_CONTACT', payload: { name: prettifiedName, trimmedNumber } });
+
+            setName('');
+            setNumber('');
         },
-        [onContactCreate],
+        [contacts, dispatch],
     );
 
     return (
