@@ -2,14 +2,18 @@ import React, { useCallback, useContext, useEffect, useState } from 'react';
 import { debounce } from 'lodash';
 import { Box } from '../../_shared/Box';
 import { Input } from '../../_shared/Input';
-import { PhonebookContext } from '../PhonebookContext';
+import { PhonebookContext } from '../store/PhonebookContext';
+import { PhonebookActions } from '../store/phonebookReducer';
 
 export const ContactsFilter: React.FC = () => {
     const { contacts, dispatch } = useContext(PhonebookContext);
     const [value, setValue] = useState('');
 
     const debouncedHandler = useCallback(
-        debounce((e) => dispatch({ type: 'SET_SEARCH', payload: { search: e.target.value.trim() } }), 200),
+        debounce(
+            (e) => dispatch({ type: PhonebookActions.SET_SEARCH, payload: { search: e.target.value.trim() } }),
+            200,
+        ),
         [debounce],
     );
 
