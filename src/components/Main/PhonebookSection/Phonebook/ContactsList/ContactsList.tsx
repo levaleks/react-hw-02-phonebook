@@ -8,7 +8,10 @@ import { PhonebookActions } from '../store/phonebookReducer';
 export const ContactsList: React.FC = () => {
     const { search, contacts, dispatch } = useContext(PhonebookContext);
 
-    const handleContactDelete = useCallback((id) => dispatch({ type: PhonebookActions.DELETE_CONTACT, payload: { id } }), [dispatch]);
+    const handleContactDelete = useCallback(
+        (id) => dispatch({ type: PhonebookActions.DELETE_CONTACT, payload: { id } }),
+        [dispatch],
+    );
 
     const filteredContacts = useMemo(
         () => contacts.filter(({ name }) => name.toLocaleLowerCase().includes(search.toLocaleLowerCase())),
