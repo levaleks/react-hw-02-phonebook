@@ -34,6 +34,7 @@ export const CreateContact: React.FC = () => {
             });
 
             if (hasDuplicate) {
+                // eslint-disable-next-line no-alert
                 alert(`${prettifiedName} is already in your contacts`);
 
                 return;
