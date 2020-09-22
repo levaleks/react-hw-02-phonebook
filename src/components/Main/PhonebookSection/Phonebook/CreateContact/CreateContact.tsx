@@ -2,7 +2,8 @@ import React, { ChangeEvent, useCallback, useContext, useState } from 'react';
 import { Box } from '../../_shared/Box';
 import { Input } from '../../_shared/Input';
 import { Button } from '../../_shared/Button';
-import { PhonebookContext } from '../PhonebookContext';
+import { PhonebookContext } from '../store/PhonebookContext';
+import { PhonebookActions } from '../store/phonebookReducer';
 
 export const CreateContact: React.FC = () => {
     const { contacts, dispatch } = useContext(PhonebookContext);
@@ -23,8 +24,8 @@ export const CreateContact: React.FC = () => {
         (e) => {
             e.preventDefault();
 
-            const prettifiedName = e.target.name.value.trim().replace(/\s{2,}/g, ' ');
-            const trimmedNumber = e.target.number.value.trim();
+            const prettifiedName: string = e.target.name.value.trim().replace(/\s{2,}/g, ' ');
+            const trimmedNumber: string = e.target.number.value.trim();
 
             if (!prettifiedName || !trimmedNumber) return;
 
@@ -33,12 +34,16 @@ export const CreateContact: React.FC = () => {
             });
 
             if (hasDuplicate) {
+                // eslint-disable-next-line no-alert
                 alert(`${prettifiedName} is already in your contacts`);
 
                 return;
             }
 
-            dispatch({ type: 'CREATE_CONTACT', payload: { name: prettifiedName, trimmedNumber } });
+            dispatch({
+                type: PhonebookActions.CREATE_CONTACT,
+                payload: { name: prettifiedName, number: trimmedNumber },
+            });
 
             setName('');
             setNumber('');

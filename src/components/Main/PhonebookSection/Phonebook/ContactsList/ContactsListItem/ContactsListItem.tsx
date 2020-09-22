@@ -1,6 +1,6 @@
 import React from 'react';
 import { SContactsListItem, SDelete, SName, SNumber } from './ContactsListItem.sc';
-import { Contact } from '../../phonebookReducer';
+import { Contact } from '../../_shared/Contact';
 
 export type ContactsListItemProps = Contact & {
     onContactDelete: (id: string) => void;
