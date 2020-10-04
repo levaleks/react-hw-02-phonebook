@@ -1,4 +1,4 @@
-import { uniqueId } from 'lodash';
+import { v4 as uuid } from 'uuid';
 import { Contact } from '../_shared/Contact';
 
 export type PhonebookState = { search: string; contacts: Contact[] };
@@ -53,10 +53,7 @@ export const phonebookReducer = (state: PhonebookState, action: PhonebookActionT
         case PhonebookActions.CREATE_CONTACT:
             return {
                 ...state,
-                contacts: [
-                    ...state.contacts,
-                    { id: uniqueId(), name: action.payload.name, number: action.payload.number },
-                ],
+                contacts: [...state.contacts, { id: uuid(), name: action.payload.name, number: action.payload.number }],
             };
         case PhonebookActions.DELETE_CONTACT:
             return {
